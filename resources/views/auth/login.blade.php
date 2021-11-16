@@ -23,7 +23,7 @@
 
             <div class="mt-4 form-group">
                 <x-jet-label for="password" class="mb-1 text-white text-lg" value="{{ __('Password') }}" />
-                <x-jet-input id="password" placeholder="........" class="block mt-1 w-full form-control" type="password" name="password" required autocomplete="current-password" />
+                <x-jet-input id="password" placeholder="***********" class="block mt-1 w-full form-control" type="password" name="password" required autocomplete="current-password" />
             </div>
 
             <div class="block mt-4" style="justify-content: space-between !important;">

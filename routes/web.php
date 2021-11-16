@@ -1,6 +1,11 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\Profile\AdminProfileController;
+use App\Http\Controllers\Admin\Walmart\WalmartController;
+// use App\Http\Controllers\User\UserController;
+use App\Http\Controllers\User\UserRegistrationFornController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -17,8 +22,38 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+// Start middleware
+
+Route::group(['middleware' => 'auth'] , function(){
+
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    });
+   // Dashboard Route
+
+   Route::prefix('admin')->group(function () {
+
+        Route::prefix('user')->group(function () {
+            Route::get('/' , '\App\Http\Controllers\User\UserController@index'); 
+            Route::get('/user-registration-form' , '\App\Http\Controllers\User\UserController@create'); 
+            Route::post('/store' , '\App\Http\Controllers\User\UserController@store'); 
+        });    
+        // User Table layout
+
+        Route::get('/profile' , [AdminProfileController::class , 'index'])->name('admin.profile'); 
+        // Show profile Layout Route
+
+        Route::get('/walmart' , [WalmartController::class , 'index'])->name('admin.walmart'); 
+    //******* Walmart API's Route */ 
+
+   });
+
+  //********** Prefix admin */ 
+
+});
+
+// End of middleware
+
+
 
 require __DIR__.'/auth.php';

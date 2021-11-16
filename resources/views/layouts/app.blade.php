@@ -736,14 +736,23 @@
                                             <a class="nav-link" href="javascript:void(0)" role="button" data-toggle="dropdown">
                                                 <img src="{{ asset('AppealLab/images/profile/17.jpg') }}" width="20" alt=""/>
                                                 <div class="header-info">
-                                                    <span class="text-black"><strong>Peter Parkur</strong></span>
-                                                    <p class="fs-12 mb-0">Super Admin</p>
+                                                    <span class="text-black"><strong>{{ Auth::user()->name }}</strong></span>
+                                                    
+                                                    @if(Auth::user()->role_id == 1) 
+
+                                                        <p class="fs-12 mb-0"> Admin</p>
+                                                    
+                                                    @else
+                                                    
+                                                        <p class="fs-12 mb-0"> User</p>
+                                                    
+                                                    @endif
                                                 </div>
                                             </a>
                                             <div class="dropdown-menu dropdown-menu-right">
                                                 <a href="{{ url('user/profile') }}" class="dropdown-item ai-icon flex">
                                                     <svg id="icon-user1" xmlns="http://www.w3.org/2000/svg" class="text-primary" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
-                                                    <span class="ml-2">Profile </span>
+                                                    <span class="ml-2">Update Credential </span>
                                                 </a>
                                                 <a href="./email-inbox.html" class="dropdown-item ai-icon">
                                                     <svg id="icon-inbox" xmlns="http://www.w3.org/2000/svg" class="text-success" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
@@ -779,81 +788,42 @@
                     <div class="deznav">
                         <div class="deznav-scroll">
                             <ul class="metismenu" id="menu">
-                                <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+                                <li><a class="has-arrow ai-icon" href="{{ url('dashboard') }}" aria-expanded="false">
                                         <i class="flaticon-381-networking"></i>
                                         <span class="nav-text">Dashboard</span>
                                     </a>
-                                    <ul aria-expanded="false">
-                                        <li><a href="{{ url('dashboard') }}">Dashboard</a></li>
-                                        <li><a href="#">Workout Statistic</a></li>
-                                        <li><a href="#">Workout Plan</a></li>
-                                        <li><a href="#">Distance Map</a></li>
-                                        <li><a href="#">Diet Food Menu</a></li>
-                                        <li><a href="#">Personal Record</a></li>
-                                    </ul>
-                                </li>
-                                <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
-                                        <i class="flaticon-381-television"></i>
-                                        <span class="nav-text">Apps</span>
-                                    </a>
-                                    <ul aria-expanded="false">
-                                        <li><a href="./app-profile.html">Profile</a></li>
-                                        <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">Email</a>
-                                            <ul aria-expanded="false">
-                                                <li><a href="./email-compose.html">Compose</a></li>
-                                                <li><a href="./email-inbox.html">Inbox</a></li>
-                                                <li><a href="./email-read.html">Read</a></li>
-                                            </ul>
-                                        </li>
-                                        <li><a href="./app-calender.html">Calendar</a></li>
-                                        <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">Shop</a>
-                                            <ul aria-expanded="false">
-                                                <li><a href="./ecom-product-grid.html">Product Grid</a></li>
-                                                <li><a href="./ecom-product-list.html">Product List</a></li>
-                                                <li><a href="./ecom-product-detail.html">Product Details</a></li>
-                                                <li><a href="./ecom-product-order.html">Order</a></li>
-                                                <li><a href="./ecom-checkout.html">Checkout</a></li>
-                                                <li><a href="./ecom-invoice.html">Invoice</a></li>
-                                                <li><a href="./ecom-customers.html">Customers</a></li>
-                                            </ul>
-                                        </li>
-                                    </ul>
                                 </li>
                                 <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
                                         <i class="flaticon-381-controls-3"></i>
-                                        <span class="nav-text">Charts</span>
+                                        <span class="nav-text">Users</span>
                                     </a>
                                     <ul aria-expanded="false">
-                                        <li><a href="./chart-flot.html">Flot</a></li>
-                                        <li><a href="./chart-morris.html">Morris</a></li>
-                                        <li><a href="./chart-chartjs.html">Chartjs</a></li>
-                                        <li><a href="./chart-chartist.html">Chartist</a></li>
-                                        <li><a href="./chart-sparkline.html">Sparkline</a></li>
-                                        <li><a href="./chart-peity.html">Peity</a></li>
+                                        <li><a href="{{ url('admin/user/user-registration-form') }}">Registration</a></li>
+                                        <li><a href="{{ url('admin/user') }}">Users</a></li>
                                     </ul>
                                 </li>
                                 <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
                                         <i class="flaticon-381-internet"></i>
-                                        <span class="nav-text">Bootstrap</span>
+                                        <span class="nav-text">Subscription</span>
                                     </a>
                                     <ul aria-expanded="false">
-                                        <li><a href="./ui-accordion.html">Accordion</a></li>
-                                        <li><a href="./ui-alert.html">Alert</a></li>
-                                        <li><a href="./ui-badge.html">Badge</a></li>
-                                        <li><a href="./ui-button.html">Button</a></li>
-                                        <li><a href="./ui-modal.html">Modal</a></li>
-                                        <li><a href="./ui-button-group.html">Button Group</a></li>
-                                        <li><a href="./ui-list-group.html">List Group</a></li>
-                                        <li><a href="./ui-media-object.html">Media Object</a></li>
-                                        <li><a href="./ui-card.html">Cards</a></li>
-                                        <li><a href="./ui-carousel.html">Carousel</a></li>
-                                        <li><a href="./ui-dropdown.html">Dropdown</a></li>
-                                        <li><a href="./ui-popover.html">Popover</a></li>
-                                        <li><a href="./ui-progressbar.html">Progressbar</a></li>
-                                        <li><a href="./ui-tab.html">Tab</a></li>
-                                        <li><a href="./ui-typography.html">Typography</a></li>
-                                        <li><a href="./ui-pagination.html">Pagination</a></li>
-                                        <li><a href="./ui-grid.html">Grid</a></li>
+                                        <li><a href="#">Accordion</a></li>
+                                        <li><a href="#">Alert</a></li>
+                                        <li><a href="#">Badge</a></li>
+                                        <li><a href="#">Button</a></li>
+                                        <li><a href="#">Modal</a></li>
+                                        <li><a href="#">Button Group</a></li>
+                                        <li><a href="#">List Group</a></li>
+                                        <li><a href="#">Media Object</a></li>
+                                        <li><a href="#">Cards</a></li>
+                                        <li><a href="#">Carousel</a></li>
+                                        <li><a href="#">Dropdown</a></li>
+                                        <li><a href="#">Popover</a></li>
+                                        <li><a href="#">Progressbar</a></li>
+                                        <li><a href="#">Tab</a></li>
+                                        <li><a href="#">Typography</a></li>
+                                        <li><a href="#">Pagination</a></li>
+                                        <li><a href="#">Grid</a></li>
 
                                     </ul>
                                 </li>
@@ -862,13 +832,13 @@
                                         <span class="nav-text">Plugins</span>
                                     </a>
                                     <ul aria-expanded="false">
-                                        <li><a href="./uc-select2.html">Select 2</a></li>
-                                        <li><a href="./uc-nestable.html">Nestedable</a></li>
-                                        <li><a href="./uc-noui-slider.html">Noui Slider</a></li>
-                                        <li><a href="./uc-sweetalert.html">Sweet Alert</a></li>
-                                        <li><a href="./uc-toastr.html">Toastr</a></li>
-                                        <li><a href="./map-jqvmap.html">Jqv Map</a></li>
-                                        <li><a href="./uc-lightgallery.html">Lightgallery</a></li>
+                                        <li><a href="#">Select 2</a></li>
+                                        <li><a href="#">Nestedable</a></li>
+                                        <li><a href="#">Noui Slider</a></li>
+                                        <li><a href="#">Sweet Alert</a></li>
+                                        <li><a href="#">Toastr</a></li>
+                                        <li><a href="#">Jqv Map</a></li>
+                                        <li><a href="#">Lightgallery</a></li>
                                     </ul>
                                 </li>
                                 <li><a href="widget-basic.html" class="ai-icon" aria-expanded="false">
@@ -878,42 +848,21 @@
                                 </li>
                                 <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
                                         <i class="flaticon-381-notepad"></i>
-                                        <span class="nav-text">Forms</span>
+                                        <span class="nav-text">API's</span>
                                     </a>
                                     <ul aria-expanded="false">
-                                        <li><a href="./form-element.html">Form Elements</a></li>
-                                        <li><a href="./form-wizard.html">Wizard</a></li>
-                                        <li><a href="./form-editor-summernote.html">Summernote</a></li>
-                                        <li><a href="form-pickers.html">Pickers</a></li>
-                                        <li><a href="form-validation-jquery.html">Jquery Validate</a></li>
+                                        <li><a href="/admin/walmart">Walmart</a></li>
                                     </ul>
                                 </li>
                                 <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
                                         <i class="flaticon-381-network"></i>
-                                        <span class="nav-text">Table</span>
+                                        <span class="nav-text">Setting</span>
                                     </a>
                                     <ul aria-expanded="false">
-                                        <li><a href="table-bootstrap-basic.html">Bootstrap</a></li>
-                                        <li><a href="table-datatable-basic.html">Datatable</a></li>
-                                    </ul>
-                                </li>
-                                <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
-                                        <i class="flaticon-381-layer-1"></i>
-                                        <span class="nav-text">Pages</span>
-                                    </a>
-                                    <ul aria-expanded="false">
-                                        <li><a href="./page-register.html">Register</a></li>
-                                        <li><a href="./page-login.html">Login</a></li>
-                                        <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">Error</a>
-                                            <ul aria-expanded="false">
-                                                <li><a href="./page-error-400.html">Error 400</a></li>
-                                                <li><a href="./page-error-403.html">Error 403</a></li>
-                                                <li><a href="./page-error-404.html">Error 404</a></li>
-                                                <li><a href="./page-error-500.html">Error 500</a></li>
-                                                <li><a href="./page-error-503.html">Error 503</a></li>
-                                            </ul>
-                                        </li>
-                                        <li><a href="./page-lock-screen.html">Lock Screen</a></li>
+                                        <li><a href="{{ url('admin/profile') }}">Profile</a></li>
+                                        <li><a href="#">Marketplaces</a></li>
+                                        <li><a href="#">Subscription</a></li>
+                                        <li><a href="#">Payment & Billings</a></li>
                                     </ul>
                                 </li>
                             </ul>
@@ -987,10 +936,10 @@
     <script src="{{ asset('AppealLab/vendor/peity/jquery.peity.min.js') }}"></script>
 	
 	<!-- Apex Chart -->
-	<script src="{{ asset('AppealLab/vendor/apexchart/apexchart.js') }}"></script>
+	<!-- <script src="{{ asset('AppealLab/vendor/apexchart/apexchart.js') }}"></script> -->
 	
 	<!-- Dashboard 1 -->
-	<script src="{{ asset('AppealLab/js/dashboard/dashboard-1.js') }}"></script>
+	<!-- <script src="{{ asset('AppealLab/js/dashboard/dashboard-1.js') }}"></script> -->
 	<script>
 		function carouselReview(){
 			/*  testimonial one function by = owl.carousel.js */
