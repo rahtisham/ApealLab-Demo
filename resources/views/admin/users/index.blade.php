@@ -34,11 +34,11 @@
 
                                 @foreach($userListing as $userGetData)
                                     <tr>
-                                       <td>{{ $userGetData->name }}</td>
+                                        <td>{{ $userGetData->name }}</td>
                                         <td>{{ $userGetData->l_name }}</td>
                                         <td>{{ $userGetData->email }}</td>
                                         <td>{{ $userGetData->businessName }}</td>
-                                        <td>{{ $userGetData->role_id }}</td>
+                                        <td>{{ $userGetData->category }}</td>
                                         <td><span class="badge light badge-success">{{ $userGetData->status }}</span></td>
                                         <td>
                                             <div class="dropdown ml-auto text-right">
@@ -46,9 +46,12 @@
                                                     <svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><rect x="0" y="0" width="24" height="24"></rect><circle fill="#000000" cx="5" cy="12" r="2"></circle><circle fill="#000000" cx="12" cy="12" r="2"></circle><circle fill="#000000" cx="19" cy="12" r="2"></circle></g></svg>
                                                     </div>
                                                     <div class="dropdown-menu dropdown-menu-right">
-                                                        <a class="dropdown-item" href="#">Accept Patient</a>
-                                                        <a class="dropdown-item" href="#">Reject Order</a>
-                                                        <a class="dropdown-item" href="#">View Details</a>
+                                                        <a class="dropdown-item" href="{{ url('admin/user/edit' , ['id' => $userGetData->id ]) }}">Edit</a>
+                                                        <a class="dropdown-item" href="#">
+                                                            <form action="" method="post">
+                                                            <button class="delete" type="button" value="{{ $userGetData->id }}">Delete</button>
+                                                        </a>
+                                                        <a class="dropdown-item" href="{{ url('admin/user/profile') }}">View</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -65,7 +68,6 @@
                                         <th>Role</th>
                                         <th>Status</th>
                                         <th>Action</th>
-                                        
                                     </tr>
                                 </tfoot>
                             </table>
@@ -80,3 +82,33 @@
 <!-- Datatable -->
 <script src="{{ asset('AppealLab/vendor/datatables/js/jquery.dataTables.min.js') }}"></script>
 <script src="{{ asset('AppealLab/js/plugins-init/datatables.init.js') }}"></script>
+
+<script>
+    jQuery(document).ready(function(){
+     jQuery('button').click(function(){
+
+        var del = $(this).val();
+        if(confirm('Are you sure you wont to delete this user'))
+        {
+            jQuery.ajax({
+            url:"admin/user/destroy",
+            type:'post',
+            data: {
+                "_token": _token,
+                "del": del
+                },
+            success:function(result) {
+                //console.log(data);
+                jQuery('#subject').html(result);
+            }
+        });
+        /**Ajax code ends**/
+        }
+        else
+        {
+            alert('not working');
+        }
+      
+ });
+});
+</script>

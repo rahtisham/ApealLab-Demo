@@ -39,6 +39,12 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+        
+        $role = $request->get('role');
+        $roles = (explode("_",$role));
+        $checkRoleId = $roles[0];
+        $checkRoleName = $roles[1];
+
         $this->validate($request , [
 
             'fname' => 'required',
@@ -59,7 +65,8 @@ class UserController extends Controller
         'status' => "Active",
         'email' => $request->get('email'),
         'businessName' => $request->get('business'),
-        'role_id' => $request->get('role'),
+        'role_id' => $checkRoleId,
+        'category' => $checkRoleName,
         'password' => Hash::make($request['password']),
 
         ]);
@@ -88,7 +95,9 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        // 
+        $userEdit = User::where('id' , '=' , $id)->first();
+        return view('admin.users.edit' , compact('userEdit'));
     }
 
     /**
@@ -100,7 +109,31 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
+        $this->validate($request , [
+
+            'fname' => 'required',
+            'lname' => 'required',
+            'email' => 'required',
+            'business' => 'required',
+            'status' => 'required',
+            'role' => 'required'
+
+        ]);
+
+        $userUpdate =  User::find($id);
+
+        $userUpdate->name = $request->get('fname');
+        $userUpdate->l_name = $request->get('lname');
+        $userUpdate->email = $request->get('email');
+        $userUpdate->businessName = $request->get('business');
+        $userUpdate->status = $request->get('status');
+        $userUpdate->role_id = $request->get('role');
+
+        $userUpdate->save();
+
+
+        return back()->with('success' , 'Successfully User Has Updated');
     }
 
     /**

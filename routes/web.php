@@ -29,30 +29,46 @@ Route::group(['middleware' => 'auth'] , function(){
     Route::get('/dashboard', function () {
         return view('dashboard');
     });
-   // Dashboard Route
 
-   Route::prefix('admin')->group(function () {
 
-        Route::prefix('user')->group(function () {
-            Route::get('/' , '\App\Http\Controllers\User\UserController@index'); 
-            Route::get('/user-registration-form' , '\App\Http\Controllers\User\UserController@create'); 
-            Route::post('/store' , '\App\Http\Controllers\User\UserController@store'); 
-        });    
-        // User Table layout
+    Route::group(['middleware' => 'role:admin', 'prefix' => 'admin', 'as' => 'admin.'], function() {
 
-        Route::get('/profile' , [AdminProfileController::class , 'index'])->name('admin.profile'); 
-        // Show profile Layout Route
+            Route::prefix('user')->group(function () {
+                Route::get('/' , '\App\Http\Controllers\User\UserController@index'); 
+                Route::get('/user-registration-form' , '\App\Http\Controllers\User\UserController@create'); 
+                Route::post('/store' , '\App\Http\Controllers\User\UserController@store'); 
+                Route::get('edit/{id}' , '\App\Http\Controllers\User\UserController@edit'); 
+                Route::post('update/{id}' , '\App\Http\Controllers\User\UserController@update'); 
+                Route::post('destroy/{id}' , '\App\Http\Controllers\User\UserController@destroy'); 
+            });
+            
+            Route::prefix('user')->group(function () {
+                Route::get('/profile' , [AdminProfileController::class , 'index'])->name('admin.profile'); 
+            });
 
-        Route::get('/walmart' , [WalmartController::class , 'index'])->name('admin.walmart'); 
-    //******* Walmart API's Route */ 
+            Route::prefix('walmart')->group(function () {
+                Route::get('/' , [WalmartController::class , 'index'])->name('admin.walmart'); 
+            });   
 
-   });
+    });
 
-  //********** Prefix admin */ 
+  //********** Prefix Admin */ 
+
+
+    Route::group(['middleware' => 'role:user', 'prefix' => 'user', 'as' => 'user.'], function() {
+    
+            // Route::prefix('profile')->group(function () {
+            //     Route::get('/' , [AdminProfileController::class , 'index'])->name('admin.profile');
+            // });
+
+    });
+
+  //********** Prefix Users */ 
+
 
 });
 
-// End of middleware
+//********** End of middleware */
 
 
 

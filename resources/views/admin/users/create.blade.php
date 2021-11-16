@@ -83,8 +83,8 @@
                                                 </div>
                                                 <select class="form-control" id="val-username1" name="role" >
                                                     <option value="">Select a Role</option>
-                                                    <option value="1">Admin</option>
-                                                    <option value="2">User</option>
+                                                    <option value="1_Admin">Admin</option>
+                                                    <option value="2_User">User</option>
                                                 </select>
                                              </div>
                                              @error('role')
