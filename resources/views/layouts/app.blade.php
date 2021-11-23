@@ -20,12 +20,13 @@
 
         <!-- AppealLab script and css classes -->
         <link rel="icon" type="{{ asset('image/png') }}" sizes="16x16" href="{{ asset('AppealLab/images/favicon.png') }}">
+        <link rel="stylesheet" href="{{ asset('AppealLab/js/ajax.js') }}">
         <link rel="stylesheet" href="{{ asset('AppealLab/vendor/chartist/css/chartist.min.css') }}">
         <link href="{{ asset('AppealLab/vendor/bootstrap-select/dist/css/bootstrap-select.min.css') }}" rel="stylesheet">
         <link href="{{ asset('AppealLab/vendor/owl-carousel/owl.carousel.css') }}" rel="stylesheet">
         <link href="{{ asset('AppealLab/css/style.css') }}" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
-
+        
     </head>
     <body class="font-sans antialiased">
         <x-jet-banner />
@@ -868,9 +869,9 @@
                                         <span class="nav-text">Setting</span>
                                     </a>
                                     <ul aria-expanded="false">
-                                        <li><a href="{{ url('admin/profile') }}">Profile</a></li>
+                                        <li><a href="{{ url('admin/user/profile') }}">Profile</a></li>
                                         <li><a href="#">Marketplaces</a></li>
-                                        <li><a href="#">Subscription</a></li>
+                                        <li><a href="{{ url('admin/plan') }}">Subscription</a></li>
                                         <li><a href="#">Payment & Billings</a></li>
                                     </ul>
                                 </li>
@@ -883,6 +884,17 @@
                                         <i class="flaticon-381-networking"></i>
                                         <span class="nav-text">Dashboard</span>
                                     </a>
+                                </li>
+                                <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+                                        <i class="flaticon-381-network"></i>
+                                        <span class="nav-text">Setting</span>
+                                    </a>
+                                    <ul aria-expanded="false">
+                                        <li><a href="{{ url('admin/user/profile') }}">Profile</a></li>
+                                        <li><a href="#">Marketplaces</a></li>
+                                        <li><a href="{{ url('user/subscription/plan') }}">Subscription</a></li>
+                                        <li><a href="#">Payment & Billings</a></li>
+                                    </ul>
                                 </li>
                             </ul>
                             @endif

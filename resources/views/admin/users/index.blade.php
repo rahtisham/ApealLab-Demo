@@ -15,6 +15,14 @@
                 <div class="card">
                     <div class="card-header">
                         <h4 class="card-title">Basic Datatable</h4>
+                        @if(\Session::has('success'))
+                        <div class="alert alert-primary alert-dismissible fade show">
+                            <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="mr-2"><circle cx="12" cy="12" r="10"></circle><path d="M8 14s1.5 2 4 2 4-2 4-2"></path><line x1="9" y1="9" x2="9.01" y2="9"></line><line x1="15" y1="9" x2="15.01" y2="9"></line></svg>
+                            <strong>Welcome!</strong> {{ \Session::get('success') }}
+                            <button type="button" class="close h-100" data-dismiss="alert" aria-label="Close"><span><i class="mdi mdi-close"></i></span>
+                            </button>
+                        </div>
+                        @endif
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
@@ -47,10 +55,7 @@
                                                     </div>
                                                     <div class="dropdown-menu dropdown-menu-right">
                                                         <a class="dropdown-item" href="{{ url('admin/user/edit' , ['id' => $userGetData->id ]) }}">Edit</a>
-                                                        <a class="dropdown-item" href="#">
-                                                            <form action="" method="post">
-                                                            <button class="delete" type="button" value="{{ $userGetData->id }}">Delete</button>
-                                                        </a>
+                                                        <a class="dropdown-item" href="{{ url('admin/user/destroy' , ['id' => $userGetData->id ]) }}">Delete</a>
                                                         <a class="dropdown-item" href="{{ url('admin/user/profile') }}">View</a>
                                                     </div>
                                                 </div>
@@ -84,31 +89,31 @@
 <script src="{{ asset('AppealLab/js/plugins-init/datatables.init.js') }}"></script>
 
 <script>
-    jQuery(document).ready(function(){
-     jQuery('button').click(function(){
+//     jQuery(document).ready(function(){
+//      jQuery('button').click(function(){
 
-        var del = $(this).val();
-        if(confirm('Are you sure you wont to delete this user'))
-        {
-            jQuery.ajax({
-            url:"admin/user/destroy",
-            type:'post',
-            data: {
-                "_token": _token,
-                "del": del
-                },
-            success:function(result) {
-                //console.log(data);
-                jQuery('#subject').html(result);
-            }
-        });
-        /**Ajax code ends**/
-        }
-        else
-        {
-            alert('not working');
-        }
+//         var del = $(this).val();
+//         if(confirm('Are you sure you wont to delete this user'))
+//         {
+//             jQuery.ajax({
+//             url:"admin/user/destroy",
+//             type:'post',
+//             data: {
+//                 "_token": _token,
+//                 "del": del
+//                 },
+//             success:function(result) {
+//                 //console.log(data);
+//                 jQuery('#subject').html(result);
+//             }
+//         });
+//         /**Ajax code ends**/
+//         }
+//         else
+//         {
+//             alert('not working');
+//         }
       
- });
-});
+//  });
+// });
 </script>
