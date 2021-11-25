@@ -42,9 +42,9 @@
                     ***********************************-->
                     <div class="nav-header">
                         <a href="index.html" class="brand-logo">
-                            <img class="logo-abbr" src="{{ asset('AppealLab/images/logo.png') }}" alt="">
-                            <img class="logo-compact" src="{{ asset('AppealLab/images/logo-text.png') }}" alt="">
-                            <img class="brand-title" src="{{ asset('AppealLab/images/logo-text.png') }}" alt="">
+                            <img class="logo-abbr" src="{{ asset('AppealLab/images/logo1.jpg') }}" alt="">
+                            <img class="logo-compact" src="{{ asset('AppealLab/images/logo-text1.jpg') }}" alt="">
+                            <img class="brand-title" src="{{ asset('AppealLab/images/logo-text1.jpg') }}" alt="">
                         </a>
 
                         <div class="nav-control">
@@ -890,10 +890,19 @@
                                         <span class="nav-text">Setting</span>
                                     </a>
                                     <ul aria-expanded="false">
-                                        <li><a href="{{ url('admin/user/profile') }}">Profile</a></li>
-                                        <li><a href="#">Marketplaces</a></li>
+                                        <li><a href="{{ url('user/profile') }}">Profile</a></li>
+                                        <li><a href="{{ url('user/marketplace') }}">Marketplaces</a></li>
                                         <li><a href="{{ url('user/subscription/plan') }}">Subscription</a></li>
-                                        <li><a href="#">Payment & Billings</a></li>
+                                        <li><a href="{{ url('user/billing') }}">Payment & Billings</a></li>
+                                    </ul>
+                                </li>
+                                <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+                                        <i class="flaticon-381-network"></i>
+                                        <span class="nav-text">API's Integration</span>
+                                    </a>
+                                    <ul aria-expanded="false">
+                                        <li><a href="#">Walmart</a></li>
+                                        <li><a href="#">Amazone</a></li>
                                     </ul>
                                 </li>
                             </ul>
@@ -903,8 +912,8 @@
                                 <p class="	font-w500 mb-0">Create Workout Plan Now</p>
                             </div>
                             <div class="copyright">
-                                <p><strong>Gymove Fitness Admin Dashboard</strong> © 2020 All Rights Reserved</p>
-                                <p>Made with <span class="heart"></span> by DexignZone</p>
+                                <p><strong>Appeal Lab Admin Dashboard</strong> © 2021 All Rights Reserved</p>
+                                <p>Made with <span style="color: red;" class="heart"></span> by Out Origin</p>
                             </div>
                         </div>
                     </div>

@@ -6,6 +6,8 @@ use App\Http\Controllers\Admin\Walmart\WalmartController;
 use App\Http\Controllers\User\UserRegistrationFornController;
 use App\Http\Controllers\Plan\PlanController;
 use App\Http\Controllers\Subscription\SubscriptionController;
+use App\Http\Controllers\Billing\BillingController;
+use App\Http\Controllers\Marketplace\MarketplaceController;
 
 
 /*
@@ -71,6 +73,15 @@ Route::group(['middleware' => 'auth'] , function(){
                 Route::get('/' , [SubscriptionController::class , 'index'])->name('subscription.plan.index');
                 Route::get('/show/{plan}' , [PlanController::class , 'show'])->name('subscription.plan.show');
                 Route::post('/create' , [SubscriptionController::class , 'create'])->name('subscription.plan.create');
+            });
+
+            Route::prefix('billing')->group(function () {
+                Route::get('/' , [BillingController::class , 'index'])->name('billing.index');
+                Route::get('destroy/{id}' , [BillingController::class , 'destroy'])->name('billing.destroy');
+            });
+
+            Route::prefix('marketplace')->group(function () {
+                Route::get('/' , [MarketplaceController::class , 'index'])->name('marketplace.index');
             });
 
     });

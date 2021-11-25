@@ -82,9 +82,8 @@
                                     <tr>
                                         <th>Id</th>
                                         <th>Name</th>
-                                        <th>Stripe Plan</th>
                                         <th>Cost</th>
-                                        <th>Discription Name</th>
+                                        <th>Discription</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -94,8 +93,7 @@
                                         <tr>
                                             <td>{{ $CreatePlan->id }}</td>
                                             <td>{{ $CreatePlan->name }}</td>
-                                            <td>{{ $CreatePlan->cost }}</td>
-                                            <td>{{ $CreatePlan->stripe_plan }}</td>
+                                            <td>${{ $CreatePlan->cost }}</td>
                                             <td>{{ $CreatePlan->description }}</td>
                                             <td>
                                                 <div class="dropdown ml-auto text-right">

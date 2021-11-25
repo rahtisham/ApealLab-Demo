@@ -4,17 +4,30 @@ namespace App\Http\Controllers\Billing;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use app\Models\User;
+use Stripe;
+use Session;
+use Exception;
 
 class BillingController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+
+        $user = $request->user();
+
+        $default = $user->defaultPaymentMethod();   
+
+        $paymentMethods = $user->paymentMethods();
+  
+
+        return view('billing.index' , compact('paymentMethods' , 'default'));
     }
 
     /**
@@ -78,8 +91,18 @@ class BillingController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request , $id)
     {
-        //
+       $user = $request->user();
+       $paymentMethods = $user->paymentMethods()->delete();
+       if($paymentMethods)
+       {
+           echo "Done";
+       }
+
+       else
+       {
+           echo "not Working";
+       }
     }
 }

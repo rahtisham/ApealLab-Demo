@@ -6,10 +6,13 @@
         </div> -->
         <div class="page-titles justify-content-between">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="javascript:void(0)">Plan</a></li>
                 <li class="breadcrumb-item active"><a href="javascript:void(0)">Payment Method</a></li>
+                @foreach($plan as $PlanData)
+                <li class="breadcrumb-item "><a href="javascript:void(0)">You will be charged ${{ number_format($PlanData->cost, 2) }} for {{ $PlanData->name }} Plan</a></li>
+                @endforeach
             </ol>
         </div>
+
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="">
@@ -21,9 +24,6 @@
                         </button>
                     </div>
                 @endif
-                @foreach($plan as $PlanData)
-                     <p>You will be charged ${{ number_format($PlanData->cost, 2) }} for {{ $PlanData->name }} Plan</p>
-                @endforeach
             </div>
             <div class="card">
                 <form action="{{ url('user/subscription/plan/create') }}" method="post" id="payment-form">
@@ -31,21 +31,23 @@
                     <div class="form-group">
                         <div class="card-header">
                             <label for="card-element">
-                                Enter your credit card information
+                                <img src="{{ asset('AppealLab/images/Visa_Logo.PNG') }}">
+                                <b>Enter your credit card information</b>
                             </label>
                         </div>
                         <div class="card-body">
                             <div id="card-element">
                             <!-- A Stripe Element will be inserted here. -->
                             </div>
-                            <div id="card-errors" role="alert"></div>
+
+                            <div style="margin-top: 12px; color: red;" id="card-errors" role="alert"></div>
                             <input type="hidden" name="plan" value="{{ $PlanData->id }}" />
                             <!-- <input type="hidden" id="card-holder-name" value="2"> -->
                         </div>
                     </div>
                     <div class="card-footer">
                     <button class="btn btn-primary" id="card-button" data-secret="{{ $intent->client_secret }}">
-                        Payment Method
+                        Payment Method <i></i>
                     </button>
                     </div>
                 </form>
@@ -53,6 +55,7 @@
         </div>
     </div>
 </div>
+<script src="{{ asset('AppealLab/vendor/sweetalert2/dist/sweetalert2.min.js') }}"></script>
 <script src="https://js.stripe.com/v3/"></script>
 <script>
     // Custom styling can be passed to options when creating an Element.
@@ -101,7 +104,7 @@
         stripe
             .handleCardSetup(clientSecret, cardElement, {
                 payment_method_data: {
-                    //billing_details: { name: cardHolderName.value }
+                    // billing_details: { name: cardHolderName.value }
                 }
             })
             .then(function(result) {
@@ -111,6 +114,7 @@
                     var errorElement = document.getElementById('card-errors');
                     errorElement.textContent = result.error.message;
                 } else {
+                    $("#card-button").attr("disabled", true);
                     console.log(result);
                     // Send the token to your server.
                     stripeTokenHandler(result.setupIntent.payment_method);
@@ -132,4 +136,7 @@
         form.submit();
     }
 </script>
+
+
+
 </x-app-layout>

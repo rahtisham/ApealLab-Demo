@@ -49,6 +49,7 @@ class SubscriptionController extends Controller
         $user->newSubscription('default', $plan->stripe_plan)
             ->create($paymentMethod, [
                 'email' => $user->email,
+                'name' => $user->name,
             ]);
         
         return back()->with('success' , 'Your plan subscribed successfully');
