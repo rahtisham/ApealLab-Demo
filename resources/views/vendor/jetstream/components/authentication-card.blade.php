@@ -13,7 +13,8 @@
                                 <div class="col-xl-12">
                                     <div class="auth-form">
                                         <div class="text-center mb-3 justify-content-center">
-                                            <a href="#"><img style="text-align: center;" src="{{ asset('AppealLab/images/logo-full.png') }}" alt=""></a>
+                                        <a href="#"><img style="text-align: center;" src="{{ asset('AppealLab/images/logo1.png') }}" alt=""></a>
+                                        <a href="#"><img style="text-align: center;" src="{{ asset('AppealLab/images/logo-text1.png') }}" alt=""></a>
                                         </div>
                                         <h4 class="text-center mb-4 text-white">Sign in your account</h4>
                                             {{ $slot }}

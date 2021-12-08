@@ -1,13 +1,12 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Admin\Profile\AdminProfileController;
-use App\Http\Controllers\Admin\Walmart\WalmartController;
-use App\Http\Controllers\User\UserRegistrationFornController;
-use App\Http\Controllers\Plan\PlanController;
-use App\Http\Controllers\Subscription\SubscriptionController;
-use App\Http\Controllers\Billing\BillingController;
-use App\Http\Controllers\Marketplace\MarketplaceController;
+use App\Http\Controllers\Integrations\WalmartController;
+use App\Http\Controllers\Integrations\AmazoneController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\MailController;
+use App\Http\Controllers\WalmartGetAllTemsController;
+
 
 
 /*
@@ -29,64 +28,30 @@ Route::get('/', function () {
 
 Route::group(['middleware' => 'auth'] , function(){
 
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    });
 
+        Route::get('/dashboard' , [DashboardController::class , 'index'])->name('dashboard');
 
-    Route::group(['middleware' => 'role:admin', 'prefix' => 'admin', 'as' => 'admin.'], function() {
+        Route::get('/dashboard/product' , [WalmartGetAllTemsController::class , 'index'])->name('dashboard.index');
+        Route::post('/dashboard/check' , [WalmartGetAllTemsController::class , 'checkProduct'])->name('dashboard.check');
 
-            Route::prefix('user')->group(function () {
-                Route::get('/' , '\App\Http\Controllers\User\UserController@index'); 
-                Route::get('/user-registration-form' , '\App\Http\Controllers\User\UserController@create'); 
-                Route::post('/store' , '\App\Http\Controllers\User\UserController@store'); 
-                Route::get('edit/{id}' , '\App\Http\Controllers\User\UserController@edit'); 
-                Route::post('update/{id}' , '\App\Http\Controllers\User\UserController@update'); 
-                Route::any('destroy/{id}' , '\App\Http\Controllers\User\UserController@destroy'); 
-            });
-            
-            Route::prefix('user')->group(function () {
-                Route::get('/profile' , [AdminProfileController::class , 'index'])->name('admin.profile'); 
-            });
- 
-            Route::prefix('walmart')->group(function () {
-                Route::get('/' , [WalmartController::class , 'index'])->name('admin.walmart'); 
-            });
+        Route::prefix('dashboard/')->group(function () {
+            Route::get('integration-listening-view/{id}' , [WalmartController::class , 'walmartIntegrationLintingView'])->name('integration-listening-view');
+            Route::get('integration-listening-destroy/{id}' , [WalmartController::class , 'walmartListeningDelete'])->name('integration-listening-destroy');
+        });
 
-            Route::prefix('plan')->group(function () {
-                Route::get('/' , [PlanController::class , 'index'])->name('plan.index'); 
-                Route::post('/store' , [PlanController::class , 'store'])->name('plan.store'); 
-            });   
+        Route::get('/dashboard/select-marketplace', function () {
+            return view('marketplace');
+        });
 
-    });
+        Route::prefix('dashboard/marketplace/')->group(function () {
+        Route::get('walmart' , [WalmartController::class , 'index'])->name('marketplace.walmart');
+        Route::post('walmart/add' , [WalmartController::class , 'add'])->name('marketplace.walmart');
+        Route::get('emailsend/' , [MailController::class , 'sendEmail'])->name('marketplace.emailsend');
+        });
 
-  //********** Prefix Admin */ 
-
-
-    Route::group(['middleware' => 'role:user', 'prefix' => 'user', 'as' => 'user.'], function() {
-    
-            Route::prefix('profile')->group(function () {
-                Route::get('/index' , [AdminProfileController::class , 'index'])->name('admin.profile');
-            });
-
-            Route::prefix('subscription/plan')->group(function () {
-                Route::get('/' , [SubscriptionController::class , 'index'])->name('subscription.plan.index');
-                Route::get('/show/{plan}' , [PlanController::class , 'show'])->name('subscription.plan.show');
-                Route::post('/create' , [SubscriptionController::class , 'create'])->name('subscription.plan.create');
-            });
-
-            Route::prefix('billing')->group(function () {
-                Route::get('/' , [BillingController::class , 'index'])->name('billing.index');
-                Route::get('destroy/{id}' , [BillingController::class , 'destroy'])->name('billing.destroy');
-            });
-
-            Route::prefix('marketplace')->group(function () {
-                Route::get('/' , [MarketplaceController::class , 'index'])->name('marketplace.index');
-            });
-
-    });
-
-  //********** Prefix Users */ 
+        Route::prefix('dashboard/marketplace/')->group(function () {
+        Route::get('amazone' , [AmazoneController::class , 'index'])->name('amazone.walmart');
+        });
 
 
 });
@@ -94,5 +59,5 @@ Route::group(['middleware' => 'auth'] , function(){
 //********** End of middleware */
 
 
-
 require __DIR__.'/auth.php';
+

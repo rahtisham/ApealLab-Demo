@@ -26,7 +26,7 @@
         <link href="{{ asset('AppealLab/vendor/owl-carousel/owl.carousel.css') }}" rel="stylesheet">
         <link href="{{ asset('AppealLab/css/style.css') }}" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
-        
+
     </head>
     <body class="font-sans antialiased">
         <x-jet-banner />
@@ -36,22 +36,22 @@
             ***********************************-->
             <div id="main-wrapper">
 
-          
+
                     <!--**********************************
                     Nav header start
                     ***********************************-->
                     <div class="nav-header">
-                        <a href="index.html" class="brand-logo">
-                            <img class="logo-abbr" src="{{ asset('AppealLab/images/logo1.jpg') }}" alt="">
-                            <img class="logo-compact" src="{{ asset('AppealLab/images/logo-text1.jpg') }}" alt="">
-                            <img class="brand-title" src="{{ asset('AppealLab/images/logo-text1.jpg') }}" alt="">
+                        <a href="{{ url('dashboard') }}" class="brand-logo">
+                            <img class="logo-abbr" src="{{ asset('AppealLab/images/logo1.png') }}" alt="">
+                            <img class="logo-compact" src="{{ asset('AppealLab/images/logo-text1.png') }}" alt="">
+                            <img class="brand-title" src="{{ asset('AppealLab/images/logo-text1.png') }}" alt="">
                         </a>
 
-                        <div class="nav-control">
+                        <!-- <div class="nav-control">
                             <div class="hamburger">
                                 <span class="line"></span><span class="line"></span><span class="line"></span>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                     <!--**********************************
                         Nav header end
@@ -283,7 +283,7 @@
                                             <div>
                                                 <h6 class="mb-1">Chat with Khelesh</h6>
                                                 <p class="mb-0 text-success">Online</p>
-                                            </div>							
+                                            </div>
                                             <div class="dropdown">
                                                 <a href="javascript:void(0)" data-toggle="dropdown" ><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="18px" height="18px" viewBox="0 0 24 24" version="1.1"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><rect x="0" y="0" width="24" height="24"/><circle fill="#000000" cx="5" cy="12" r="2"/><circle fill="#000000" cx="12" cy="12" r="2"/><circle fill="#000000" cx="19" cy="12" r="2"/></g></svg></a>
                                                 <ul class="dropdown-menu dropdown-menu-right">
@@ -558,7 +558,7 @@
                     <!--**********************************
                         Chat box End
                     ***********************************-->
-                    
+
                     <!--**********************************
                         Header start
                     ***********************************-->
@@ -567,19 +567,20 @@
                             <nav class="navbar navbar-expand">
                                 <div class="collapse navbar-collapse justify-content-between">
                                     <div class="header-left">
-                                        <div class="dashboard_bar">
-                                            Dashboard
-                                        </div>
+                                        <!-- <div class="dashboard_bar">
+                                            <img src="{{ asset('AppealLab/images/logo1.jpg') }}" alt="">
+                                            <img src="{{ asset('AppealLab/images/logo-text1.jpg') }}" alt="">
+                                        </div> -->
                                     </div>
                                     <ul class="navbar-nav header-right">
-                                        <li class="nav-item">
+                                        <!-- <li class="nav-item">
                                             <div class="input-group search-area d-xl-inline-flex d-none">
                                                 <div class="input-group-append">
                                                     <span class="input-group-text"><a href="javascript:void(0)"><i class="flaticon-381-search-2"></i></a></span>
                                                 </div>
                                                 <input type="text" class="form-control" placeholder="Search here...">
                                             </div>
-                                        </li>
+                                        </li> -->
                                         <li class="nav-item dropdown notification_dropdown">
                                             <a class="nav-link  ai-icon" href="javascript:void(0)" role="button" data-toggle="dropdown">
                                                 <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -735,18 +736,18 @@
                                         </li>
                                         <li class="nav-item dropdown header-profile">
                                             <a class="nav-link" href="javascript:void(0)" role="button" data-toggle="dropdown">
-                                                <img src="{{ asset('AppealLab/images/profile/17.jpg') }}" width="20" alt=""/>
+                                                <img src="{{ asset('AppealLab/images/ahtisham.jpg') }}" width="20" alt=""/>
                                                 <div class="header-info">
                                                     <span class="text-black"><strong>{{ Auth::user()->name }}</strong></span>
-                                                    
-                                                    @if(Auth::user()->role_id == 1) 
+
+                                                    @if(Auth::user()->role_id == 1)
 
                                                         <p class="fs-12 mb-0"> Admin</p>
-                                                    
+
                                                     @else
-                                                    
+
                                                         <p class="fs-12 mb-0"> User</p>
-                                                    
+
                                                     @endif
                                                 </div>
                                             </a>
@@ -754,6 +755,10 @@
                                                 <a href="{{ url('user/profile') }}" class="dropdown-item ai-icon flex">
                                                     <svg id="icon-user1" xmlns="http://www.w3.org/2000/svg" class="text-primary" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
                                                     <span class="ml-2">Update Credential </span>
+                                                </a>
+                                                <a href="{{ url('dashboard/marketplace/walmart') }}" class="dropdown-item ai-icon flex">
+                                                    <svg id="icon-user1" xmlns="http://www.w3.org/2000/svg" class="text-primary" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                                                    <span class="ml-2">Marketplace </span>
                                                 </a>
                                                 @if(auth()->user()->role_id == 1)
                                                 <a href="{{ url('admin/user/profile') }}" class="dropdown-item ai-icon">
@@ -791,135 +796,7 @@
                         Header end ti-comment-alt
                     ***********************************-->
 
-                     <!--**********************************
-                        Sidebar start
-                    ***********************************-->
-                    <div class="deznav">
-                        <div class="deznav-scroll">
-                            @if(auth()->user()->role_id == 1)
-                            <ul class="metismenu" id="menu">
-                                <li><a class="has-arrow ai-icon" href="{{ url('dashboard') }}" aria-expanded="false">
-                                        <i class="flaticon-381-networking"></i>
-                                        <span class="nav-text">Dashboard</span>
-                                    </a>
-                                </li>
-                                <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
-                                        <i class="flaticon-381-controls-3"></i>
-                                        <span class="nav-text">Users</span>
-                                    </a>
-                                    <ul aria-expanded="false">
-                                        <li><a href="{{ url('admin/user/user-registration-form') }}">Registration</a></li>
-                                        <li><a href="{{ url('admin/user') }}">Users</a></li>
-                                    </ul>
-                                </li>
-                                <!-- <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
-                                        <i class="flaticon-381-internet"></i>
-                                        <span class="nav-text">Subscription</span>
-                                    </a>
-                                    <ul aria-expanded="false">
-                                        <li><a href="#">Accordion</a></li>
-                                        <li><a href="#">Alert</a></li>
-                                        <li><a href="#">Badge</a></li>
-                                        <li><a href="#">Button</a></li>
-                                        <li><a href="#">Modal</a></li>
-                                        <li><a href="#">Button Group</a></li>
-                                        <li><a href="#">List Group</a></li>
-                                        <li><a href="#">Media Object</a></li>
-                                        <li><a href="#">Cards</a></li>
-                                        <li><a href="#">Carousel</a></li>
-                                        <li><a href="#">Dropdown</a></li>
-                                        <li><a href="#">Popover</a></li>
-                                        <li><a href="#">Progressbar</a></li>
-                                        <li><a href="#">Tab</a></li>
-                                        <li><a href="#">Typography</a></li>
-                                        <li><a href="#">Pagination</a></li>
-                                        <li><a href="#">Grid</a></li>
 
-                                    </ul>
-                                </li>
-                                <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
-                                        <i class="flaticon-381-heart"></i>
-                                        <span class="nav-text">Plugins</span>
-                                    </a>
-                                    <ul aria-expanded="false">
-                                        <li><a href="#">Select 2</a></li>
-                                        <li><a href="#">Nestedable</a></li>
-                                        <li><a href="#">Noui Slider</a></li>
-                                        <li><a href="#">Sweet Alert</a></li>
-                                        <li><a href="#">Toastr</a></li>
-                                        <li><a href="#">Jqv Map</a></li>
-                                        <li><a href="#">Lightgallery</a></li>
-                                    </ul>
-                                </li> -->
-                                <!-- <li><a href="widget-basic.html" class="ai-icon" aria-expanded="false">
-                                        <i class="flaticon-381-settings-2"></i>
-                                        <span class="nav-text">Widget</span>
-                                    </a>
-                                </li> -->
-                                <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
-                                        <i class="flaticon-381-notepad"></i>
-                                        <span class="nav-text">API's</span>
-                                    </a>
-                                    <ul aria-expanded="false">
-                                        <li><a href="/admin/walmart">Walmart</a></li>
-                                    </ul>
-                                </li>
-                                <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
-                                        <i class="flaticon-381-network"></i>
-                                        <span class="nav-text">Setting</span>
-                                    </a>
-                                    <ul aria-expanded="false">
-                                        <li><a href="{{ url('admin/user/profile') }}">Profile</a></li>
-                                        <li><a href="#">Marketplaces</a></li>
-                                        <li><a href="{{ url('admin/plan') }}">Subscription</a></li>
-                                        <li><a href="#">Payment & Billings</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
-                            @endif
-
-                            @if(auth()->user()->role_id == 2)
-                            <ul class="metismenu" id="menu">
-                                <li><a class="has-arrow ai-icon" href="{{ url('dashboard') }}" aria-expanded="false">
-                                        <i class="flaticon-381-networking"></i>
-                                        <span class="nav-text">Dashboard</span>
-                                    </a>
-                                </li>
-                                <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
-                                        <i class="flaticon-381-network"></i>
-                                        <span class="nav-text">Setting</span>
-                                    </a>
-                                    <ul aria-expanded="false">
-                                        <li><a href="{{ url('user/profile') }}">Profile</a></li>
-                                        <li><a href="{{ url('user/marketplace') }}">Marketplaces</a></li>
-                                        <li><a href="{{ url('user/subscription/plan') }}">Subscription</a></li>
-                                        <li><a href="{{ url('user/billing') }}">Payment & Billings</a></li>
-                                    </ul>
-                                </li>
-                                <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
-                                        <i class="flaticon-381-network"></i>
-                                        <span class="nav-text">API's Integration</span>
-                                    </a>
-                                    <ul aria-expanded="false">
-                                        <li><a href="#">Walmart</a></li>
-                                        <li><a href="#">Amazone</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
-                            @endif
-                            <div class="add-menu-sidebar">
-                                <img src="{{ asset('AppealLab/images/calendar.png') }}" alt="" class="mr-3">
-                                <p class="	font-w500 mb-0">Create Workout Plan Now</p>
-                            </div>
-                            <div class="copyright">
-                                <p><strong>Appeal Lab Admin Dashboard</strong> © 2021 All Rights Reserved</p>
-                                <p>Made with <span style="color: red;" class="heart"></span> by Out Origin</p>
-                            </div>
-                        </div>
-                    </div>
-                    <!--**********************************
-                        Sidebar end
-                    ***********************************-->
 
                     <!-- Page Headinge -->
                     @if (isset($header))
@@ -934,9 +811,9 @@
                     <main>
 
                     <!--**********************************
-                    Content body start
+                    Content body start content-body"
                     ***********************************-->
-                    <div class="content-body">
+                    <div>
                         <div class="min-h-screen bg-gray-100">
                             <!-- <div class="content-body"> -->
 
@@ -949,7 +826,7 @@
                         Content body end
                     ***********************************-->
 
-                   
+
                     </main>
             </div>
             <!--**********************************
@@ -972,13 +849,13 @@
     <script src="{{ asset('AppealLab/js/custom.min.js') }}"></script>
 	<script src="{{ asset('AppealLab/js/deznav-init.js') }}"></script>
 	<script src="{{ asset('AppealLab/vendor/owl-carousel/owl.carousel.js') }}"></script>
-	
+
 	<!-- Chart piety plugin files -->
     <script src="{{ asset('AppealLab/vendor/peity/jquery.peity.min.js') }}"></script>
-	
+
 	<!-- Apex Chart -->
 	<!-- <script src="{{ asset('AppealLab/vendor/apexchart/apexchart.js') }}"></script> -->
-	
+
 	<!-- Dashboard 1 -->
 	<!-- <script src="{{ asset('AppealLab/js/dashboard/dashboard-1.js') }}"></script> -->
 	<script>
@@ -1001,11 +878,11 @@
 					},
 					882:{
 						items:3
-					},	
+					},
 					1200:{
 						items:2
-					},			
-					
+					},
+
 					1540:{
 						items:3
 					},
@@ -1013,11 +890,11 @@
 						items:4
 					}
 				}
-			})			
+			})
 		}
 		jQuery(window).on('load',function(){
 			setTimeout(function(){
 				carouselReview();
-			}, 1000); 
+			}, 1000);
 		});
 	</script>

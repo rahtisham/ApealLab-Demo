@@ -403,6 +403,7 @@
 					border: 2px solid $primary;
 					display: block;
 					line-height: 3rem;
+                    background-color: red !important;
 					color: $primary;
 					font-size: 18px;
 					margin: auto;
@@ -516,7 +517,7 @@
             height: 10rem;
             border-radius: 50%;
             cursor: pointer;
-            background-color: #EEF5F9;
+            background-color: #000000;
 			text-align: center;
 			margin: auto;
 			@at-root [data-theme-version="dark"] & {
