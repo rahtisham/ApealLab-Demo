@@ -113,9 +113,30 @@ class WalmartController extends Controller
 
     public function walmartIntegrationLintingView(Request $request , $id)
     {
+        $user_session_id =  auth()->user()->id;
+        $integrations = DB::table('integrations')->where('id' , $id )->first();
 
-        $integrations = DB::table('integrations')->where('id' , $id)->first();
-        return view('integrationListening' , compact('id' , 'integrations'));
+        $CountActive = DB::table('products')->where('lifeStatus' , '=' , 'ACTIVE')
+            ->where('client_id' , '=' , $id)
+            ->where('user_id' , '=' , $user_session_id)
+            ->get()
+            ->count();
+
+
+        $CountPublished = DB::table('products')->where('publishedStatus' , '=' ,'PUBLISHED')
+            ->where('client_id' , '=' , $id)
+            ->where('user_id' , '=' , $user_session_id)
+            ->get()
+            ->count();
+
+
+        $CountUnpublished = DB::table('products')->where('publishedStatus' ,'=' , 'UNPUBLISHED')
+            ->where('client_id' , '=' , $id)
+            ->where('user_id' , '=' , $user_session_id)
+            ->get()
+            ->count();
+
+        return view('integrationListening' , compact('id' , 'integrations' , 'CountActive' , 'CountPublished' , 'CountUnpublished'));
 
     }
 

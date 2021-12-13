@@ -15,6 +15,7 @@ class Product extends Model
 
         'product_id ',
         'user_id',
+        'client_id',
         'itemId',
         'UPC',
         'SKU',

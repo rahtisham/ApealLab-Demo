@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Console\Commands\WalmartProductsNotification;
 use App\Models\apiIntegrations;
 use Illuminate\Http\Request;
 use App\Actions\Integration\Walmart;
 use App\Models\product;
+use Illuminate\Support\Facades\Log;
 
 
 class WalmartGetAllTemsController extends Controller
@@ -33,25 +35,25 @@ class WalmartGetAllTemsController extends Controller
         $response[] = Walmart::getItem($client_id , $secret);
             // Walmart taken generate with Original data
 
+            $ApiIntegration = apiIntegrations::where('client_id' , $client_id)->first();
+            $clientIntegrationId =  $ApiIntegration->id;
 
             foreach ($response[0]['ItemResponse'] as $items) {
 
+                $unpublishedReasons = '';
 
-             $unpublishedReasons = [];
-             // If $unpublishedReasons empty will run
-
-            if(array_key_exists('unpublishedReasons' ,$items))
-            {
-                $unpublished = $items['unpublishedReasons']['reason'];
-                $unpublishedReasons = implode(', ', $unpublished);
-                // If $unpublishedReasons get here so this query will run
-            }
+                if(array_key_exists('unpublishedReasons' ,$items))
+                {
+                    $unpublished = $items['unpublishedReasons']['reason'];
+                    $unpublishedReasons = implode(', ', $unpublished);
+                }
 
                 $price = $items['price']['amount'];
 
-                $productItems[] = Product::create([
+                $productItems = Product::create([
                     'itemId' => $items['wpid'],
                     'user_id' => auth()->user()->id,
+                    'client_id' => $clientIntegrationId,
                     'UPC' => $items['upc'],
                     'SKU' => $items['sku'],
                     'Title' => $items['productName'],
@@ -61,17 +63,19 @@ class WalmartGetAllTemsController extends Controller
                     'publishedStatus' => $items['publishedStatus']
                 ]);
 
-                if ($productItems)
-                {
-                    echo "Data Inserted";
-                }
-                else
-                {
-                    echo "Data did not insert";
-                }
-
             }
         //End loop
+            if ($productItems)
+            {
+                echo "Data Inserted";
+                log::info('Walmart API Data Have Been Interted');
+            }
+            else
+            {
+                echo "Data did not insert";
+            }
+
+
 
          }
     //End function

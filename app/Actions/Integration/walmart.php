@@ -100,6 +100,11 @@ class Walmart{
         }
     }
 
+//    public static function updateInventory($client_id , $secret)
+//    {
+//
+//    }
+
 
 }
 
