@@ -23,6 +23,7 @@ class Product extends Model
         'price',
         'unpublishedReasons',
         'lifeStatus',
+        'emailNotification',
         'publishedStatus'
 
     ];

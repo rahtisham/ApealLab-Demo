@@ -32,7 +32,7 @@ Route::group(['middleware' => 'auth'] , function(){
         Route::get('/dashboard' , [DashboardController::class , 'index'])->name('dashboard');
 
         Route::get('/dashboard/product' , [WalmartGetAllTemsController::class , 'index'])->name('dashboard.index');
-        Route::get('/dashboard/check' , [WalmartGetAllTemsController::class , 'checkProduct'])->name('dashboard.check');
+        Route::post('/dashboard/check' , [WalmartGetAllTemsController::class , 'checkProduct'])->name('dashboard.check');
 
         Route::prefix('dashboard/')->group(function () {
             Route::get('integration-listening-view/{id}' , [WalmartController::class , 'walmartIntegrationLintingView'])->name('integration-listening-view');

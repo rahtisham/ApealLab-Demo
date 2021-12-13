@@ -35,6 +35,8 @@ class WalmartGetAllTemsController extends Controller
         $response[] = Walmart::getItem($client_id , $secret);
             // Walmart taken generate with Original data
 
+//        return $response;
+
             $ApiIntegration = apiIntegrations::where('client_id' , $client_id)->first();
             $clientIntegrationId =  $ApiIntegration->id;
 
@@ -48,6 +50,13 @@ class WalmartGetAllTemsController extends Controller
                     $unpublishedReasons = implode(', ', $unpublished);
                 }
 
+                $status = 'test';
+                if($items['publishedStatus'] === "UNPUBLISHED")
+                {
+                    $status = "Email Notification";
+                }
+
+
                 $price = $items['price']['amount'];
 
                 $productItems = Product::create([
@@ -60,7 +69,8 @@ class WalmartGetAllTemsController extends Controller
                     'price' => $price,
                     'unpublishedReasons' => $unpublishedReasons,
                     'lifeStatus' => $items['lifecycleStatus'],
-                    'publishedStatus' => $items['publishedStatus']
+                    'publishedStatus' => $items['publishedStatus'],
+                    'emailNotification' => $status
                 ]);
 
             }
