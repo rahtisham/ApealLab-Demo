@@ -56,7 +56,8 @@ class EmailNotification extends Command
                         'productID' => $products['itemId'],
                         'productName' => $products['Title'],
                         'publishedStatus' => $products['publishedStatus'],
-                        'resion' => $products['unpublishedReasons'],
+                        'reason' => $products['unpublishedReasons'],
+                        'productLink' => "https://www.walmart.com/ip/".$products['itemId'],
                         'userEmail' => $email
                     ];
                     Mail::to($email)->send(new MailNotification($detail));

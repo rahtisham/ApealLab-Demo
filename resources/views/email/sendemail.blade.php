@@ -28,8 +28,12 @@
                 <td colspan="2">{{ $detail['publishedStatus']  }}</td>
             </tr>
             <tr>
-                <th scope="row">RESION</th>
-                <td colspan="2">{{ $detail['resion']  }}</td>
+                <th scope="row">REASON</th>
+                <td colspan="2">{{ $detail['reason']  }}</td>
+            </tr>
+            <tr>
+                <th scope="row">PRODUCT LINK</th>
+                <td colspan="2">{{ $detail['productLink']  }}</td>
             </tr>
             </tbody>
         </table>

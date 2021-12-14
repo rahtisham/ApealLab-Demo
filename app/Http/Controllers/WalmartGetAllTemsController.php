@@ -34,8 +34,11 @@ class WalmartGetAllTemsController extends Controller
 
         $response[] = Walmart::getItem($client_id , $secret);
             // Walmart taken generate with Original data
-
-//        return $response;
+        $authorization = base64_encode($client_id.":".$secret);
+        $token = Walmart::getToken($client_id , $secret);
+        $token = $token['access_token'];
+        $requestID = uniqid();
+        return $requestID;
 
             $ApiIntegration = apiIntegrations::where('client_id' , $client_id)->first();
             $clientIntegrationId =  $ApiIntegration->id;
