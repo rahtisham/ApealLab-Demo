@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Console\Commands\WalmartProductsNotification;
 use App\Models\apiIntegrations;
 use Illuminate\Http\Request;
 use App\Actions\Integration\Walmart;
 use App\Models\product;
+use Illuminate\Support\Facades\Log;
 
 
 class WalmartGetAllTemsController extends Controller
@@ -32,46 +34,61 @@ class WalmartGetAllTemsController extends Controller
 
         $response[] = Walmart::getItem($client_id , $secret);
             // Walmart taken generate with Original data
+        $authorization = base64_encode($client_id.":".$secret);
+        $token = Walmart::getToken($client_id , $secret);
+        $token = $token['access_token'];
+        $requestID = uniqid();
+        return $requestID;
 
+            $ApiIntegration = apiIntegrations::where('client_id' , $client_id)->first();
+            $clientIntegrationId =  $ApiIntegration->id;
 
             foreach ($response[0]['ItemResponse'] as $items) {
 
+                $unpublishedReasons = '';
 
-             $unpublishedReasons = [];
-             // If $unpublishedReasons empty will run
+                if(array_key_exists('unpublishedReasons' ,$items))
+                {
+                    $unpublished = $items['unpublishedReasons']['reason'];
+                    $unpublishedReasons = implode(', ', $unpublished);
+                }
 
-            if(array_key_exists('unpublishedReasons' ,$items))
-            {
-                $unpublished = $items['unpublishedReasons']['reason'];
-                $unpublishedReasons = implode(', ', $unpublished);
-                // If $unpublishedReasons get here so this query will run
-            }
+                $status = 'test';
+                if($items['publishedStatus'] === "UNPUBLISHED")
+                {
+                    $status = "Email Notification";
+                }
+
 
                 $price = $items['price']['amount'];
 
-                $productItems[] = Product::create([
+                $productItems = Product::create([
                     'itemId' => $items['wpid'],
                     'user_id' => auth()->user()->id,
+                    'client_id' => $clientIntegrationId,
                     'UPC' => $items['upc'],
                     'SKU' => $items['sku'],
                     'Title' => $items['productName'],
                     'price' => $price,
                     'unpublishedReasons' => $unpublishedReasons,
                     'lifeStatus' => $items['lifecycleStatus'],
-                    'publishedStatus' => $items['publishedStatus']
+                    'publishedStatus' => $items['publishedStatus'],
+                    'emailNotification' => $status
                 ]);
-
-                if ($productItems)
-                {
-                    echo "Data Inserted";
-                }
-                else
-                {
-                    echo "Data did not insert";
-                }
 
             }
         //End loop
+            if ($productItems)
+            {
+                echo "Data Inserted";
+                log::info('Walmart API Data Have Been Interted');
+            }
+            else
+            {
+                echo "Data did not insert";
+            }
+
+
 
          }
     //End function

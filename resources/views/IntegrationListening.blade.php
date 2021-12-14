@@ -9,6 +9,51 @@
         <!-- row -->
 
         <div class="row">
+            <div class="col-xl-4 col-lg-6">
+                <div class="card">
+                    <div class="card-header pb-0 border-0">
+								<span class="p-3 mr-3 rounded bg-secondary text-white">
+                                    {{ $CountActive }}
+								</span>
+                        <div class="mr-auto pr-3">
+                            <h4 class="text-black fs-20">ACTIVE</h4>
+                            <p class="fs-13 mb-0 text-black">Total Products Active</p>
+                        </div>
+                    </div>
+                    <div class="card-body pb-0">
+                        <div id="chartBar"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-4 col-lg-6">
+                <div class="card">
+                    <div class="card-header pb-0 border-0">
+								<span class="p-3 mr-3 rounded bg-danger text-white">
+                                    {{ $CountPublished }}
+								</span>
+                        <div class="mr-auto pr-3">
+                            <h4 class="text-black fs-20">PUBLISHED</h4>
+                            <p class="fs-13 mb-0 text-black">Total Products Published</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-4">
+                <div class="card">
+                    <div class="card-header pb-0 border-0">
+								<span class="p-3 mr-3 rounded bg-warning text-white">
+                                    {{ $CountUnpublished }}
+								</span>
+                        <div class="mr-auto pr-3">
+                            <h4 class="text-black fs-20">UNPUBLISHED</h4>
+                            <p class="fs-13 mb-0 text-black">Total Products Unpublished</p>
+                        </div>
+                    </div>
+                    <div class="card-body pb-0">
+                        <div id="chartBar3"></div>
+                    </div>
+                </div>
+            </div>
             <div class="col-12">
                 <div class="row">
                     <div class="col-xl-8 col-lg-8">

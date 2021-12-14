@@ -23,6 +23,8 @@ class Integrations extends Migration
             $table->boolean('is_active')->nullable;
             $table->longText('token')->nullable;
             $table->string('status')->nullable;
+            $table->string('updated_at');
+            $table->string('created_at');
         });
     }
 

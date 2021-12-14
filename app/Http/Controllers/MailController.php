@@ -14,6 +14,6 @@ class MailController extends Controller
             'body' => 'This is for testing email.'
         ];
         Mail::to('ahtishamn676@gmail.com')->send(new MailNotification($detail));
-        return "Mail Has Been Sent";
+
     }
 }

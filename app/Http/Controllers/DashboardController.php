@@ -10,8 +10,8 @@ class DashboardController extends Controller
     //
     public function index()
     {
-        $integrationData = apiIntegrations::all();
-        // return $integrationData;
+        $user_seesion_id = Auth()->user()->id;
+        $integrationData = apiIntegrations::where('user_id' , $user_seesion_id)->get();
         return view('dashboard' , compact('integrationData'));
     }
 }

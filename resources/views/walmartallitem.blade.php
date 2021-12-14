@@ -1,5 +1,5 @@
 <x-app-layout>
-    <div class="container" style="margin-top: 100px;">
+<div class="container" style="margin-top: 100px;">
         <div class="page-titles mr-5">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
@@ -39,6 +39,7 @@
                 </div>
             </form>
         </div>
+
     </div>
 </x-app-layout>
 

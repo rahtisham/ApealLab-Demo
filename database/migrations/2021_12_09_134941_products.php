@@ -16,14 +16,17 @@ class Products extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->increments('product_id');
             $table->bigInteger('user_id');
+            $table->String('client_id');
             $table->String('itemId');
             $table->String('UPC');
             $table->String('SKU');
             $table->String('Title');
-            $table->json('unpublishedReasons');
-            $table->String('lifeStatus');
-            $table->string('publishedStatus');
-            $table->timestamp('failed_at')->useCurrent();
+            $table->json('price');
+            $table->json('unpublishedReasons')->nullable();
+            $table->string('lifeStatus');
+            $table->json('publishedStatus')->nullable();
+            $table->string('updated_at');
+            $table->string('created_at');
         });
     }
 
