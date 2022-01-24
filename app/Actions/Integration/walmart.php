@@ -54,6 +54,8 @@ class Walmart{
 
         $token = SELF::getToken($client_id , $secret);
         $token = $token['access_token'];
+//        dd($token);
+
         $url = "https://marketplace.walmartapis.com/v3/items";
         $requestID = uniqid();
         $authorization = base64_encode($client_id.":".$secret);
@@ -88,9 +90,10 @@ class Walmart{
 
         curl_close($curl);
 
+         $token = json_decode($response,true);
+
         if($code == 201 || $code == 200)
         {
-            return $token = json_decode($response,true);
 
         }
         else{

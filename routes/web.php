@@ -6,6 +6,7 @@ use App\Http\Controllers\Integrations\AmazoneController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\MailController;
 use App\Http\Controllers\WalmartGetAllTemsController;
+use App\Http\Controllers\PaymentController;
 
 
 
@@ -28,8 +29,7 @@ Route::get('/', function () {
 
 Route::group(['middleware' => 'auth'] , function(){
 
-
-        Route::get('/dashboard' , [DashboardController::class , 'index'])->name('dashboard');
+        Route::get('/dashboard' , [DashboardController::class , 'index'])->middleware(['auth' , 'verified'])->name('dashboard');
 
         Route::get('/dashboard/product' , [WalmartGetAllTemsController::class , 'index'])->name('dashboard.index');
         Route::post('/dashboard/check' , [WalmartGetAllTemsController::class , 'checkProduct'])->name('dashboard.check');
@@ -53,10 +53,14 @@ Route::group(['middleware' => 'auth'] , function(){
         Route::get('amazone' , [AmazoneController::class , 'index'])->name('amazone.walmart');
         });
 
+        Route::get('pay' , [PaymentController::class , 'pay'])->name('pay');
+        Route::post('/dopay/online' , [PaymentController::class , 'handleonlinepay'])->name('dopay.online');
+
 
 });
 
 //********** End of middleware */
+
 
 
 require __DIR__.'/auth.php';
